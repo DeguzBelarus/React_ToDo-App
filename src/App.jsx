@@ -5,9 +5,6 @@ import TodoList from "./components/TodoList/TodoList";
 
 function App() {
   let todosSave = JSON.parse(localStorage.getItem("todossave"));
-  if (todosSave == null) {
-    todosSave = [];
-  }
 
   const [todos, setTodos] = useState(todosSave);
 
@@ -34,15 +31,13 @@ function App() {
   };
 
   useEffect(() => {
-    if (todos == "") {
-      fetch("https://jsonplaceholder.typicode.com/todos?_limit=5")
-        .then((response) => response.json())
-
-        .then((json) => {
-          setTodos(json);
-        });
-    }
-  }, []);
+    if (todos.length) return;
+    fetch("https://jsonplaceholder.typicode.com/todos?_limit=5")
+      .then((response) => response.json())
+      .then((json) => {
+        setTodos(json);
+      });
+  }, [todos]);
 
   useEffect(() => {
     localStorage.setItem("todossave", JSON.stringify(todos));
