@@ -1,1 +1,1 @@
-Demo: https://todo-deguz-app.herokuapp.com/
+Demo: https://deguz-todo.herokuapp.com/
